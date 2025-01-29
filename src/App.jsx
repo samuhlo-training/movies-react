@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 import Search from './components/Search'
