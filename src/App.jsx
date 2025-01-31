@@ -1,21 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
+import { updateSearchCount, getTrendingMovies } from './appwrite'
 import Search from './components/Search'
 import Spinner from './components/Spinner'
 import MovieCard from './components/MovieCard'
-import { updateSearchCount, getTrendingMovies } from './appwrite'
 import ErrorAlert from './components/ErrorAlert'
-
-const API_BASE_URL = 'https://api.themoviedb.org/3'
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY
-
-const API_OPTIONS = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${API_KEY}`,
-  },
-}
+import MovieDetails from './components/MovieDetails'
+import { API_BASE_URL, API_OPTIONS } from './constants'
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -29,11 +20,19 @@ const App = () => {
   const [trendingError, setTrendingError] = useState('')
   const [trendingLoading, setTrendingLoading] = useState(false)
 
+  const [selectedMovieId, setSelectedMovieId] = useState(null)
+  const [isOpenMovieDetails, setIsOpenMovieDetails] = useState(false)
+
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 800, [searchTerm])
 
   const closeErrorAlert = () => {
     setErrorMessage('')
     setTrendingError('')
+  }
+
+  const openMovieDetails = (movieId) => {
+    setSelectedMovieId(movieId)
+    setIsOpenMovieDetails(true)
   }
 
   const fetchMovies = async (query = '') => {
@@ -109,6 +108,13 @@ const App = () => {
           </h1>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
+          {isOpenMovieDetails && (
+            <MovieDetails
+              movieId={selectedMovieId}
+              onClose={() => setIsOpenMovieDetails(false)}
+            />
+          )}
+
           <section className="trending">
             <h2>Trending Movies</h2>
             <ul>
@@ -117,9 +123,18 @@ const App = () => {
               ) : (
                 trendingMovies.length > 0 &&
                 trendingMovies.map((movie, index) => (
-                  <li key={movie.$id}>
+                  <li
+                    key={movie.$id}
+                    onClick={() => openMovieDetails(movie.movie_id)}
+                  >
                     <p>{index + 1}</p>
-                    <img src={movie.poster_url} alt={movie.title} />
+                    <div className=" group w-auto flex justify-center text-center relative overflow-hidden rounded-md cursor-pointer">
+                      <img
+                        src={movie.poster_url}
+                        alt={movie.title}
+                        className="w-full h-auto relative z-0 rounded-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
+                      />
+                    </div>
                   </li>
                 ))
               )}
@@ -133,7 +148,11 @@ const App = () => {
           ) : (
             <ul>
               {moviesList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  openDetails={openMovieDetails}
+                />
               ))}
             </ul>
           )}
