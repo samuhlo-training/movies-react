@@ -8,6 +8,8 @@ Este proyecto es una aplicación de películas construida con **React** y **Vite
 - **📋 Detalles de películas**: Visualiza información detallada sobre cada película.
 - **⚠️ Alertas de error**: Muestra alertas en caso de errores.
 - **⏳ Cargando Spinner**: Indicador de carga mientras se obtienen los datos.
+- **🌐 Cambio de idioma**: Cambia el idioma de la interfaz entre inglés, español y portugués.
+- **🔥 Películas en tendencia**: Visualiza una lista de películas en tendencia y accede a sus detalles.
 
 ## 🛠️ Tecnologías Utilizadas
 
