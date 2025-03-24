@@ -1,6 +1,18 @@
 # 🎬 Movies React App
 
-Este proyecto es una aplicación de películas construida con **React** y **Vite**. Proporciona una interfaz de usuario para buscar y ver detalles de películas utilizando la API de **TMDB**.
+Este proyecto es una aplicación de películas construida con **React** y **Vite** para hacer un repaso de React. Proporciona una interfaz de usuario para buscar y ver detalles de películas utilizando la API de **TMDB**.
+
+<div align="center">
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+
+<img src="portada.webp"></img>
+
+</div>
+
+<strong><a href="https://movies-react-repaso.onrender.com">LINK</a></strong>
 
 ## 🚀 Características
 
